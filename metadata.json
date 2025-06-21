@@ -1,0 +1,5 @@
+{
+  "name": "Interactive Roulette Wheel",
+  "description": "A customizable roulette wheel application where users can add items, spin the wheel, and see a random winner. Built with React, TypeScript, and Tailwind CSS.",
+  "requestFramePermissions": []
+}
