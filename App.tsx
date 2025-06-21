@@ -38,10 +38,10 @@ const App: React.FC = () => {
   const handleRemoveItem = useCallback((indexToRemove: number) => {
     setItems(prevItems => prevItems.filter((_, index) => index !== indexToRemove));
     if (winningItemIndex === indexToRemove) {
-        setWinningItemIndex(null);
-        setShowWinnerPopup(false);
+      setWinningItemIndex(null);
+      setShowWinnerPopup(false);
     } else if (winningItemIndex !== null && indexToRemove < winningItemIndex) {
-        setWinningItemIndex(prev => prev! - 1);
+      setWinningItemIndex(prev => prev! - 1);
     }
   }, [winningItemIndex]);
 
@@ -54,14 +54,14 @@ const App: React.FC = () => {
 
     const randomIndex = Math.floor(Math.random() * items.length);
     const anglePerSegment = 360 / items.length;
-    
+
     // Calculate the target angle for the middle of the winning segment to align with the top pointer (270 degrees)
     const winningSegmentCenterAngle = (randomIndex + 0.5) * anglePerSegment;
     const targetRestingAngle = (270 - winningSegmentCenterAngle + 360) % 360;
 
     const currentBaseAngle = (rotationDegrees % 360 + 360) % 360;
     let differenceToTarget = (targetRestingAngle - currentBaseAngle + 360) % 360;
-    
+
     const additionalSpins = 5 + Math.floor(Math.random() * 3); // 5 to 7 full spins
     const newRotationDegrees = rotationDegrees + (additionalSpins * 360) + differenceToTarget;
 
@@ -73,7 +73,7 @@ const App: React.FC = () => {
       setShowWinnerPopup(true);
     }, 7000); // Corresponds to animation duration (6s) + buffer (1s)
   }, [items, isSpinning, rotationDegrees]);
-  
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleAddItem();
@@ -132,7 +132,7 @@ const App: React.FC = () => {
                     key={index}
                     className="flex justify-between items-center p-3 bg-gray-100 rounded-lg shadow-sm group"
                   >
-                    <span className="text-gray-800 truncate" style={{color: itemColors[index]}}>{item}</span>
+                    <span className="text-gray-800 truncate" style={{ color: itemColors[index] }}>{item}</span>
                     <button
                       onClick={() => handleRemoveItem(index)}
                       disabled={isSpinning}
@@ -159,11 +159,11 @@ const App: React.FC = () => {
             />
             {/* Pointer */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 transform">
-                <div className="w-0 h-0 
+              <div className="w-0 h-0 
                     border-l-[15px] border-l-transparent
                     border-t-[25px] border-t-indigo-600
                     border-r-[15px] border-r-transparent shadow-lg">
-                </div>
+              </div>
             </div>
           </div>
           <button
@@ -176,13 +176,13 @@ const App: React.FC = () => {
           </button>
         </div>
       </div>
-      
+
       {/* Winner Popup */}
       {showWinnerPopup && winningItemIndex !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
           <div className="bg-white p-8 rounded-xl shadow-2xl text-center max-w-md w-full transform transition-all duration-300 scale-100">
-            <h2 className="text-3xl font-bold mb-4" style={{color: itemColors[winningItemIndex]}}>おめでとう！</h2>
-            <p className="text-5xl font-extrabold mb-6 p-4 rounded-lg" style={{backgroundColor: `${itemColors[winningItemIndex]}20`, color: itemColors[winningItemIndex]}}>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: itemColors[winningItemIndex] }}>おめでとう！</h2>
+            <p className="text-5xl font-extrabold mb-6 p-4 rounded-lg" style={{ backgroundColor: `${itemColors[winningItemIndex]}20`, color: itemColors[winningItemIndex] }}>
               {items[winningItemIndex]}
             </p>
             <button
@@ -194,7 +194,7 @@ const App: React.FC = () => {
           </div>
         </div>
       )}
-       <footer className="mt-12 text-center text-gray-500 text-sm">
+      <footer className="mt-12 text-center text-gray-500 text-sm">
         <p>&copy; {new Date().getFullYear()} ルーレット名人. All rights reserved.</p>
       </footer>
     </div>
